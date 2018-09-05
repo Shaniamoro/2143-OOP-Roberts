@@ -76,7 +76,7 @@ class List
   /**
   * Adds an integer value to the end of the List  
   *
-  * @param {int} integer value to insert into List 
+  * @param {int} val: integer value to insert into List 
   * @return {NULL}
   */ 
 
@@ -103,7 +103,7 @@ class List
   /**
   * Adds an integer value to the top of the List  
   *
-  * @param {int} integer value to insert into List 
+  * @param {int} val: integer value to insert into List 
   * @return {NULL}
   */ 
     void Insert(int val)
@@ -125,7 +125,7 @@ class List
 
    /**
   * Prints the integer value from the last Node in the List 
-  *
+  *  @param {none} 
   *  @return {NULL}
   */
 
@@ -136,8 +136,9 @@ class List
 
   /**
   *  Function that returns the string representation of all the values in the list
-  *
-  *  @return {string} a string  with the members of the list in order separated by "->".
+  *   
+  *  @param {none} 
+  *  @return {string} list: a string  with the members of the list in order separated by "->".
   */
 
     string Print()
@@ -157,6 +158,7 @@ class List
  /**
   * Removes elements from the list 
   *
+  *  @param {none} 
   *  @return {0}
   */
    
@@ -171,8 +173,8 @@ class List
   * Overloading the + operator to create a new list which
   *  is the concatenation of List 1 and List 2 
   *
-  *  @param {List} Rhs 
-  *  @return {List} the concatenation of List 1 and List 2 
+  *  @param {object} Rhs: a List  
+  *  @return {object} NewList: a list which is the concatenation of List 1 and List 2 
   */
     List operator+(const List &Rhs)
     {
@@ -206,8 +208,8 @@ class List
   * Implementation of [] operator.  
   * This function returns an int value as if the list were an array.
   *
-  * @param {int} index of the node we're searching ofr 
-  * @return {Node} The value of the Node at the index given
+  * @param {int} index: the index of the node we're searching ofr 
+  * @return {object} Temp: returns the value of the Node at the index given
   */
     int operator[](int index)
     {
@@ -234,8 +236,8 @@ class List
   *  Overloading the << operator to return an output stream of our List
   *  which can access private properties of the list by using "friend" 
   *
-  *  @param {ostream, List} output stream and List.
-  *  @return {ostream} output stream of the values in the List
+  *  @param {object, object} os: output stream  and L: List to be printed.
+  *  @return {object} os: output stream of the values in the List
   */
 
     friend ostream &operator<<(ostream &os, List L)
