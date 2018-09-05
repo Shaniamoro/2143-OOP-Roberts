@@ -14,23 +14,29 @@ using namespace std;
 int A[100];
 
 
-// Declares a data structure type called Node which creates a container for list data 
+// Declares a data structure type called Node
+// which creates a container for list data 
 struct Node
 {
-    //int x will be the actual value that will be used in the various operations of the list eg. push, pop, insert, etc.
+    // int x will be the actual value that will be
+    // used in the various operations of the list 
+    // eg. push, pop, insert, etc.
     int x;
 
     //This variable will be used as a pointer the next node in the list
     Node *next;
 
-    //This is a constructor for the Node type when no argument is passed when it is declared; it then initializes the x value to -1 and seeing that it is empty there will be no reference to next.
+    //This is a constructor for the Node type when no 
+    //argument is passed when it is declared; it then initializes
+    // the x value to -1 and seeing that it is empty there will be no reference to next.
     Node()
     {
         x = -1;
         next = NULL;
     }
 
-    //This is a constructor that accepts an integer value and initializes x to whatever was passed in the argument when that node is declared.                     
+    //This is a constructor that accepts an integer value and 
+    // initializes x to whatever was passed in the argument when that node is declared.                     
     Node(int n)
     {
         x = n;
