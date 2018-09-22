@@ -64,10 +64,12 @@ They therefore will generally have the same value for every instance unless you 
 ## Inheritance
 > Inheriting the attributes and methods of a base class into a derived class is called Inheritance.
 - It helps to reduce the code size since you can reuse existing code with little to no modification.
+>
 ><img src="https://www.studytonight.com/cpp/images/inheritance-example.jpg" width=400>
 
 ## Multiple Inheritance
 > Mechanism in which a derived class inherits from two or more base classes is called a multiple inheritance
+>
 ><img src="https://cdn.programiz.com/sites/tutorial2program/files/c%2B%2Bmultiple-inheritance.jpg" width=400>
 
 ## Composition
