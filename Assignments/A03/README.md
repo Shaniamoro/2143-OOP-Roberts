@@ -5,6 +5,7 @@
 # Definitions 
 ## Class 
 > A class is logical grouping of attributes(variables) and methods(functions)
+>
 ><img src="https://upload.wikimedia.org/wikipedia/commons/6/62/CPT-OOP-objects_and_classes.svg" width=400>
 
 ## Object
@@ -72,6 +73,6 @@ They therefore will generally have the same value for every instance unless you 
 ## Composition
 > This process of building complex objects from simpler ones is called object composition.
 - Relationship between objects where one object owns or *has* the other object 
-- a car *has* a body
-- a car *has* an engine
-- a car *has* wheels
+	- a car *has* a body
+	- a car *has* an engine
+	- a car *has* wheels
