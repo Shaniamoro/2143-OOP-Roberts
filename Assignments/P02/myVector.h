@@ -225,14 +225,14 @@ public:
           divVector.pushBack(temp);
         }
        }
-      for ( int i= smaller ; i< bigger; i++ ){
-        if (size > vec2.index){
-             divVector.pushBack(this->vPtr[i]);
-        }else {
-          divVector.pushBack(vec2[i]);
-        }
+//       for ( int i= smaller ; i< bigger; i++ ){
+//         if (size > vec2.index){
+//              divVector.pushBack(this->vPtr[i]);
+//         }else {
+//           divVector.pushBack(vec2[i]);
+//         }
       
-      }
+//       }
  
     return divVector;
   };
