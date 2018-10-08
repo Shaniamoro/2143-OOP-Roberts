@@ -1,0 +1,16 @@
+Attempting to remove from empty vector
+false
+Attempting to add 13,37,73 to our vector and printing it: 
+13 37 73 
+
+Adding 1000 items into vector and printing size
+There are 1003 items in the vector.
+The size of the vector is: 1234
+
+Deleting 998 items from the vector and printing size
+There are 5 items in the vector.
+The size of the vector is: 38
+
+Printing the elements in the Vector:
+13 31 73 383 886 
+   
