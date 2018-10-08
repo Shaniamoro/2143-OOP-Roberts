@@ -1,0 +1,24 @@
+After pushBack 1 item v1 contains:[8]
+
+After pushBack 3 items  v2 contains:[10, 20, 30]
+
+After pushBack of Array v1 contains:[8, 1, 2, 3, 4, 5]
+
+After Addition v1 contains:[18, 21, 32, 3, 4, 5]
+
+Printing v1 to standard out
+[18, 21, 32, 3, 4, 5]
+
+The third item in v1 is: 32
+After constant multiplication v2 contains:[30, 60, 90]
+
+After multiplication v2 contains:[540, 1260, 2880]
+
+Replace the 3rd item in v2 with 100 v2 contains:[540, 1260, 100]
+
+Checking if == is overloaded Is v1 = v2:  0
+Checking if / is overloaded for vectors: [30, 60, 3]
+
+Checking if / is overloaded for a vector/ a number : [54, 126, 10]
+
+   
