@@ -18,9 +18,9 @@ int main() {
   cout <<endl;
 
   //Insert the values 13,31,73 into your vector. Print it out.
-  cout << "Attempting to add 13,37,73 to our vector and printing it: "<< endl;
+  cout << "Attempting to add 13,31,73 to our vector and printing it: "<< endl;
   V.push_back(13);
-  V.push_back(37);
+  V.push_back(31);
   V.push_back(73);
   V.print();
   cout << endl; 
