@@ -40,8 +40,8 @@ struct golCell {
 	golCell() {
 		isAlive = 0;
 		neighbors = 0;
-		Width = 50;
-		Height = 50;
+		Width = 10;
+		Height = 10;
 		Rect.setSize(sf::Vector2f(Width, Height));
 		Rect.setFillColor(Color::Cyan);
 		Rect.setOutlineColor(Color::Black);
@@ -70,8 +70,8 @@ public:
 	int frameCount;	// Used to count the frames 
 	int frameRate;	// the rate at which they are to be printed
 	RenderWindow Window;
-
-	//void printWorld(int, int);
+	string outfileName;
+	void printWorld(string);
 	bool onWorld(int, int);
 	int countNeighbors(int, int);
 	void changeState(int, int);
@@ -91,7 +91,8 @@ public:
 * Constructor which creates our game of life world.
 * Creates a window
 *
-* @param {int}  width:  height:
+* @param {int}  width: width of the Window  
+*				height: height of the window
 * @return {NULL}
 */
 GameOfLife::GameOfLife(int width, int height) {
@@ -111,7 +112,16 @@ GameOfLife::GameOfLife(int width, int height) {
 		}
 	}
 }
-//User inputs the rate for the iterations 
+/**
+* Constructor which creates our game of life world.
+* Creates a window
+*
+* @param {int}  width: width of the Window
+*				height: height of the window
+*				rate: User inputs the rate for the iterations 
+* @return {NULL}
+*/
+
 GameOfLife::GameOfLife(int width, int height, int rate) {
 	Width = width;
 	Height = height;
@@ -130,8 +140,15 @@ GameOfLife::GameOfLife(int width, int height, int rate) {
 		}
 	}
 }
+/**
+* Deconstructor 
+* 
+*
+* @param {int}  
+* @return {NULL}
+*/
 GameOfLife::~GameOfLife() {
-	for (int i = 0; i < Height; i++) {
+	for (int i = 0; i < worldRows; i++) {
 		//deletes the elements of the rows 
 		delete[]W[i];
 	}
@@ -141,26 +158,49 @@ GameOfLife::~GameOfLife() {
 
 /**
   * Prints the current state of the GOL world
+  * Both to the Console and to the SFML screen
   *
-  * @param {object , int} row: row we're looking at col: column we're looking at
+  * @param {None} 
   * @return {NULL}
   */
 void  GameOfLife::drawWorld() {
 	Window.clear();
+	// Printing to the window 
 	for (int i = 0; i < worldRows; i++) {
 		for (int j = 0; j < worldCols; j++) {
 			Window.draw(W[i][j].Rect);
 		}
 	}
-	cout << "Printing Array to Draw: " << endl;
+	// Printing to the console
 	for (int i = 0; i < worldRows; i++) {
 		for (int j = 0; j < worldCols; j++) {
 			cout << *(&W[i][j].isAlive) << "";
 		}
 		cout << endl;
 	}
+	// Make the thread wait
 	sleep(milliseconds(500));
 	Window.display();
+}
+/**
+  * Prints the Final World to File 
+  *
+  * @param {None}
+  * @return {NULL}
+  */
+void  GameOfLife::printWorld(string outfilename) {
+	ofstream myfile;
+	myfile.open(outfilename);
+	myfile << " Shania Roberts" << endl; 
+	myfile << " The 338th generation" << endl;
+	// Printing to the file
+	for (int i = 0; i < worldRows; i++) {
+		for (int j = 0; j < worldCols; j++) {
+			myfile << *(&W[i][j].isAlive) << "";
+		}
+		myfile << endl;
+	}
+	myfile.close();
 }
 /**
   * Checks to see if a cell is on the World
@@ -280,7 +320,7 @@ ifstream GameOfLife::readFromFile(string fileName) {
 }
 
 /**
- * Attempting to build our initial Array
+ * Attempting to build our initial Array and print it to the screen 
  *
  * @param {ifstream } infile: the file we will be using
  * @return {object} W: initial world
@@ -339,10 +379,15 @@ golCell** GameOfLife::buildArray(ifstream& infile) {
 	return W;
 	
 }
-
+/**
+ * Refreshes the generations then prints the new generation. 
+ *
+ * @param {int} runAmt: the number of times the program will run 
+ * @return {Null} 
+ */
 void GameOfLife::refreshGeneration(int runAmt) {
-	//Change the states ntimes 
-	for (int x = 1; x < runAmt; x++) {
+	//Change the states x times 
+	for (int x = 0; x < runAmt; x++) {
 		for (int i = 0; i < worldRows; i++) {
 			for (int j = 0; j < worldCols; j++) {
 				W[i][j].neighbors = countNeighbors(i, j);
@@ -353,8 +398,14 @@ void GameOfLife::refreshGeneration(int runAmt) {
 			for (int j = 0; j < worldCols; j++) {
 				changeState(i, j);
 			}
+
+			if (x == 337) {
+				printWorld(outfileName);
+			}
 		}
 		//Print the new world 
+		cout << "Printing Array to Draw: " << endl;
+		cout << "This is the  : " << x + 1 << " run" << endl;
 		drawWorld();
 	}
 }
@@ -369,6 +420,7 @@ void GameOfLife::refreshGeneration(int runAmt) {
 * @return {NULL}
 */
 void GameOfLife::run(string inputFileName, string numberOfRuns, string outputFileName) {
+	outfileName = outputFileName;
 	// Exception Handling 
 	ifstream fileStream;
 	try {
@@ -385,6 +437,7 @@ void GameOfLife::run(string inputFileName, string numberOfRuns, string outputFil
 	golCell** World = buildArray(fileStream);
 	// Converting to integer
 	int numOfGenerations = stoi(numberOfRuns);
+	// updating generations 
 	refreshGeneration(numOfGenerations);
 
 }
@@ -395,7 +448,7 @@ int main(int argc, char *argv[]) {
 	// gameOfLife Gol(1000,1000);
 	//User inputs iterations  
 	int rate = 10;
-	GameOfLife Gol(500, 500, rate);
+	GameOfLife Gol(400, 500, rate);
 
 	//GameOfLife World;
 	string infileName;
