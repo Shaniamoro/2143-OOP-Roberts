@@ -14,6 +14,7 @@
 #include <cstring>
 #include <exception>
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 using namespace sf;
 using namespace std;
 
@@ -39,8 +40,8 @@ struct golCell {
 	golCell() {
 		isAlive = 0;
 		neighbors = 0;
-		Width = 10;
-		Height = 10;
+		Width = 50;
+		Height = 50;
 		Rect.setSize(sf::Vector2f(Width, Height));
 		Rect.setFillColor(Color::Cyan);
 		Rect.setOutlineColor(Color::Black);
@@ -53,6 +54,7 @@ struct golCell {
 		Rect.setFillColor(nameOfColor);
 	}
 };
+
 // Default 
 class GameOfLife {
 private:
@@ -96,7 +98,7 @@ GameOfLife::GameOfLife(int width, int height) {
 	World = new golCell[height];
 	id = 0;
 	frameCount = 0;
-	frameRate = 5; // Game board will be printed ever 5th iteration 
+	frameRate = 50; // Game board will be printed ever 5th iteration 
 	Width = width;
 	Height = height;
 	// Creating a window with the specifications 
@@ -129,12 +131,12 @@ GameOfLife::GameOfLife(int width, int height, int rate) {
 	}
 }
 GameOfLife::~GameOfLife() {
-	//for (int i = 0; i < Height; i++) {
-	//	//deletes the elements of the rows 
-	//	delete[]W[i];
-	//}
-	////delete rows 
-	//delete[]W;
+	for (int i = 0; i < Height; i++) {
+		//deletes the elements of the rows 
+		delete[]W[i];
+	}
+	//delete rows 
+	delete[]W;
 }
 
 /**
@@ -143,18 +145,23 @@ GameOfLife::~GameOfLife() {
   * @param {object , int} row: row we're looking at col: column we're looking at
   * @return {NULL}
   */
-void GameOfLife::drawWorld() {
+void  GameOfLife::drawWorld() {
 	Window.clear();
-	for (int i = 0; i < Height; i++) {
-		for (int j = 0; j < Width; j++) {
+	for (int i = 0; i < worldRows; i++) {
+		for (int j = 0; j < worldCols; j++) {
 			Window.draw(W[i][j].Rect);
-			std::cout << i << "," << j<< " ";
 		}
-		std::cout << std::endl;
 	}
+	cout << "Printing Array to Draw: " << endl;
+	for (int i = 0; i < worldRows; i++) {
+		for (int j = 0; j < worldCols; j++) {
+			cout << *(&W[i][j].isAlive) << "";
+		}
+		cout << endl;
+	}
+	sleep(milliseconds(500));
 	Window.display();
 }
-
 /**
   * Checks to see if a cell is on the World
   *
@@ -219,22 +226,39 @@ void GameOfLife::changeState(int row, int col) {
 	// Any live cell with fewer than two live neighbors dies,as if caused by under-population.
 	if (W[row][col].isAlive == true && W[row][col].neighbors < 2) {
 		W[row][col].isAlive = false;
+		W[row][col].setCellPos(row, col);
+		W[row][col].changeColor(Color:: Black);
 	}
 	// Any live cell with more than three live neighbors dies, as if by overcrowding.
 	if (W[row][col].isAlive == true && W[row][col].neighbors > 3) {
 		W[row][col].isAlive = false;
+		W[row][col].setCellPos(row, col);
+		W[row][col].changeColor(Color::Black);
 	}
 	// Any live cell with two or three live neighbors lives on to the next generation.
 	if (W[row][col].isAlive == true && W[row][col].neighbors == 2 || W[row][col].neighbors == 3) {
 		W[row][col].isAlive = true;
+		W[row][col].setCellPos(row, col);
+		W[row][col].changeColor(Color::Magenta);
 	}
 	// Any dead cell with exactly three live neighbors becomes a live cell.
 	if (W[row][col].isAlive == false && W[row][col].neighbors == 3) {
 		W[row][col].isAlive = true;
-		//W[row][col].changeColor();
+		W[row][col].setCellPos(row, col);
+		W[row][col].changeColor(Color::Magenta);
 	}
 	else {
 		W[row][col].isAlive = W[row][col].isAlive;
+		
+		if (W[row][col].isAlive == true) {
+			W[row][col].setCellPos(row, col);
+			W[row][col].changeColor(Color::Magenta);
+		}
+		else if (W[row][col].isAlive == false) {
+			W[row][col].setCellPos(row, col);
+			W[row][col].changeColor(Color::Black);
+		}
+
 	}
 }
 /**
@@ -264,7 +288,7 @@ ifstream GameOfLife::readFromFile(string fileName) {
 
 golCell** GameOfLife::buildArray(ifstream& infile) {
 	//Reading the initial state (generation 0) for our game to be played. 
-	//Along with the number of rows and columns 
+	//Along with the number of rows and columns
 	infile >> worldRows >> worldCols;
 	W = new golCell*[worldRows];
 	for (int i = 0; i < worldRows; i++) {
@@ -301,11 +325,19 @@ golCell** GameOfLife::buildArray(ifstream& infile) {
 		for (int j = 0; j < worldCols; j++) {
 			W[i][j].isAlive = tempArray[i][j];
 			if (W[i][j].isAlive == true) {
+				W[i][j].setCellPos(i, j);
+				W[i][j].changeColor(Color::Magenta);
+			}
+			else if (W[i][j].isAlive == false) {
+				W[i][j].setCellPos(i, j);
 				W[i][j].changeColor(Color::Black);
 			}
 		}
 	}
+	
+	drawWorld();
 	return W;
+	
 }
 
 void GameOfLife::refreshGeneration(int runAmt) {
@@ -322,9 +354,8 @@ void GameOfLife::refreshGeneration(int runAmt) {
 				changeState(i, j);
 			}
 		}
-
-		//cout << "New World" << x + 1 << endl;
-		//printWorld(worldRows, worldCols);
+		//Print the new world 
+		drawWorld();
 	}
 }
 
@@ -345,32 +376,18 @@ void GameOfLife::run(string inputFileName, string numberOfRuns, string outputFil
 	}
 	catch (exception& e) {
 		//cout << "Error reading from the file" << endl;
-		exit(0);
+		exit(1);
 	}
+
 	// Reading from the file 
 	fileStream = readFromFile(inputFileName);
 	// Builds the Initial World 
 	golCell** World = buildArray(fileStream);
 	// Converting to integer
 	int numOfGenerations = stoi(numberOfRuns);
-	while (Window.isOpen()) {
-		Event event;
-		while (Window.pollEvent(event)) {
-			if (frameCount % frameRate == 0) {
-				drawWorld();
-			}
-			//Gol.drawWorld();
-			if (event.type == Event::Closed) {
-				Window.close();
-			}
+	refreshGeneration(numOfGenerations);
 
-		}
-		frameCount++;
-	}
-	// Calling function to Generate a new Generation
-	//refreshGeneration(numOfGenerations);
 }
-
 
 
 int main(int argc, char *argv[]) {
@@ -387,20 +404,21 @@ int main(int argc, char *argv[]) {
 
 	if (argc < 4) {
 		// We print argv[0] assuming it is the program name
-		// << "usage: " << argv[0] << " <filename>\n";
+		cout << "usage: " << argv[0] << " <filename>\n";
 	}
 	else {
 		infileName = argv[1];
 		numOfGenerations = argv[2];
 		outFileName = argv[3];
 		// Runs the driver fuction of the program 
-		Gol.run(infileName, numOfGenerations, outFileName);
+		//Gol.run(infileName, numOfGenerations, outFileName);
 	}
 	while (Gol.Window.isOpen()) {
 		Event event;
 		while (Gol.Window.pollEvent(event)) {
 			if (Gol.frameCount % Gol.frameRate == 0) {
-				Gol.drawWorld();
+				//Gol.drawWorld();
+				Gol.run(infileName, numOfGenerations, outFileName);
 			}
 			//Gol.drawWorld();
 			if (event.type == Event::Closed) {
@@ -410,7 +428,6 @@ int main(int argc, char *argv[]) {
 		}
 		Gol.frameCount++;
 	}
-
 
 	return 0;
 }
