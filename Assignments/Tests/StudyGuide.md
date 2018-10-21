@@ -39,6 +39,7 @@
 -----
 
 Write a class called `Rectangle` that would allow a user to:
+Code: https://repl.it/@sroberts1231/RectangleClass
  - set the width
  - set the height
  - set the width and height
