@@ -228,9 +228,9 @@ void Counter::run() {
 
 int main()
 {
-	Counter C(-1, 10);
+	Counter C(0, 5);
 	C.run();
-  Counter C2( 11, 0);
+  Counter C2( 5, 0);
   C2.run();
 	return 0;
 }
