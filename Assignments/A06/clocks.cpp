@@ -1,12 +1,12 @@
 /**
-	 *  Course: CMPS 2143 - OOP
-	 *  Assignment: A06 
-	 *  Purpose: Counter Class - Bouncing Clock
-	 *
-	 *  @author Shania Roberts
-	 *  @version 1.1 11/14/18
-	 *  @github repo: https://github.com/Shaniamoro/2143-OOP-Roberts
-	 */
+*  Course: CMPS 2143 - OOP
+*  Program: A06
+*  Purpose: Counter Class - Bouncing Clock
+*
+*  @author Shania Roberts
+*  @version 1.1 11/14/18
+*  @github repo: https://github.com/Shaniamoro/2143-OOP-Roberts
+*/
 
 
 #include <SFML/Graphics.hpp>
@@ -16,11 +16,11 @@
 using namespace std;
 
 /**
-* DrawMe Class extending from Group 
-* 
+* DrawMe Class extending from Group
 *
-*Functions: 
-*		 DrawMe() 
+*
+*Functions:
+*		 DrawMe()
 *		 changeClockPosition()
 */
 
@@ -70,7 +70,7 @@ public:
 * Counter Class extending from DrawMe
 *
 *Functions:
-	getFont(string) 
+	getFont(string)
 	Counter()
 	Counter(int, int)
 	Counter(int)
@@ -85,7 +85,7 @@ public:
 	adjustBorderColor(sf::Color)
 	createRectangle()
 	printShapes(sf::RenderWindow &)
-	bounceAround()	 
+	bounceAround()
 */
 class Counter :public DrawMe {
 private:
@@ -400,8 +400,8 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(500, 400), "Shania Roberts");
 
 	// Creating instances of the Clock
-	Counter C(-1, 20);
-	Counter C2(20, -1);
+	Counter C(-1, 10);
+	Counter C2(10, -1);
 	Counter C3(0, 1);
 
 	//Changing the position of the clocks
