@@ -1,6 +1,6 @@
 /**
 	 *  Course: CMPS 2143 - OOP
-	 *
+	 *  Assignment: A06 
 	 *  Purpose: Counter Class - Bouncing Clock
 	 *
 	 *  @author Shania Roberts
