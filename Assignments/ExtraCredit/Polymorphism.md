@@ -1,4 +1,68 @@
-#Polymorphism in C++
+### Polymorphism in C++
+
+ ## What is Polymorphism? 
+> This is one of the **Four Pillars of OOP**
+> The same interface (operator) existing in different forms is called polymorphism.
+> In other words giving different meaning or functions to the operators or functions.
+- Note : Poly refers to many. So you can think of it as a single function or an operator functioning in many ways different other than the original usage.
+- *Example: 
+    An addition between two integers 2 + 2 return 4
+    whereas an addition between two strings "Hello" + "World" concatenates it to "Hello World"*
+
+## Types of Polymorphism
+1. Runtime Polymorphism (Late Binding):This is where the compiler adds code that identifies the type of object at runtime then matched the call with the right function definition. 
+
+1. Compile time Polymorphism (Early Binding): The compiler directly associates an address to the function call. It replaces the call with a machiene language instruction that tells the mainframe to leap to the address of the function. 
+
+## Runtime Polymorphism 
+> This is achieved by function overloading and operator overloading
+> **Function Overloading**
+> When the exiting operator or function is made to operate on new data type, it is said to be overloaded.
+```
+class Rectangle {
+private:
+	float width;
+	float height;
+
+public:
+	int * Rect;
+	static int count;
+	Rectangle(); // Default does not pass in parameters
+ Rectangle (int); // Passes in one parameter of type integer 
+	Rectangle(float, float); // Passes in two parameters of type float
+ Rectangle(int, int); // Passes in two Parameters of type int 
+ };
+
+
+```
+> **Operator Overloading** 
+> Redefining how an operator operates its operands is called operator overloading.
+```
+	// Overload the << operator (inline)
+ // needs to be overloaded with the friend keyword to access private and protected members 
+ // of the classs it is in.
+	friend ostream& operator<<(ostream& os, const Rectangle &Rect) {
+		os << "{ w:" << Rect.width << " , h:" << Rect.height << " }";
+		return os;
+	}
+	
+	//Overload the = operator (inline) 
+	Rectangle& operator=(const Rectangle & Rect) {
+		this->width = Rect.width;
+		this->height = Rect.height;
+		return *this;
+	}
+	// Overload the + operator (inline)
+	Rectangle operator+(const Rectangle  &Rect) {
+		Rectangle temp (this->width + Rect.width, this->height + Rect.height);
+		count++;
+		return temp;	
+	}
+```
+
+## Compile time Polymorphism
+> This is achieved by function overriding 
+* Functon overriding 
 
 
 
