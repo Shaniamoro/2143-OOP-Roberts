@@ -1,4 +1,4 @@
-### Polymorphism in C++
+# Polymorphism in C++
 
  ## What is Polymorphism? 
 > This is one of the **Four Pillars of OOP**
@@ -16,8 +16,10 @@
 
 ## Runtime Polymorphism 
 > This is achieved by function overloading and operator overloading
+
 > **Function Overloading**
-> When the exiting operator or function is made to operate on new data type, it is said to be overloaded.
+> When the existing operator or function is made to operate on new data type, it is said to be overloaded.
+> When you overload a function you are defining a function with the same name and passing in different types of arguements or number of arguements. 
 ```
 class Rectangle {
 private:
@@ -27,10 +29,10 @@ private:
 public:
 	int * Rect;
 	static int count;
-	Rectangle(); // Default does not pass in parameters
- Rectangle (int); // Passes in one parameter of type integer 
-	Rectangle(float, float); // Passes in two parameters of type float
- Rectangle(int, int); // Passes in two Parameters of type int 
+	Rectangle(); // Default does not pass in arguments
+	Rectangle (int); // Passes in one argument of type integer 
+	Rectangle(float, float); // Passes in two arguments of type float
+	Rectangle(int, int); // Passes in two arguments of type int 
  };
 
 
