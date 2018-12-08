@@ -65,7 +65,7 @@ public:
 > Operator overloading is important when we are dealing with user defined classes. 
 
 #### Important Points on Operator Overloading 
- 1. For operator overloding to work one must be a user defined class object 
+ 1. For operator overloading to work one must be a user defined class object 
  1. The complier will overload the assignment operator (=) by default, it assings the object on the left hand side of the operator with the values of the object on the right side of the operator.
  1. The Conversion operator, which converts one type to another type must be a member method. 
  1. Any constructor that can be called with a single argument works as a conversion constructor, means it can also be used for implicit conversion to the class being constructed. 
@@ -73,7 +73,7 @@ public:
  
 
 ## Compile time Polymorphism
-> This is achieved by function overriding 
+> This is achieved by function overriding.
 > Function overriding occurs when a function in the Base class is defined using the virtual keyword and is then redifined in the member class.
 * Functon overriding 
 ```
