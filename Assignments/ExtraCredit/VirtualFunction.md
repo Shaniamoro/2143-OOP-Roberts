@@ -2,7 +2,7 @@
 
  ## What is a virtual function? 
 > This is a function that is inheritable and overridable in a derived class.
-> When trying to invoke an object from the derived class by using a pointer or a reference to the base class, the virtual function for that specific object can be used to execute the derived class's flavor of the function.  
+> When trying to invoke an object from the derived class by using a pointer or a reference to the base class, the virtual function for that specific object can be used to execute the derived class's version of the function.  
 > With virtual functions, you can achieve runtime polymorphism as the function which will be executed is chosen at runtime.
 
 ## Example: 
