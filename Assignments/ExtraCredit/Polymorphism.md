@@ -109,14 +109,8 @@ int main()
     b.fly();
 }
 ```
+For more on virtual functions:  https://www.geeksforgeeks.org/virtual-function-cpp/
 
 
-
-
-
-
-
-
-- Source: https://www.geeksforgeeks.org/virtual-function-cpp/
 - Source: https://www.geeksforgeeks.org/operator-overloading-c/
 - Source: https://www.geeksforgeeks.org/polymorphism-in-c/
