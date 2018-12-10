@@ -58,4 +58,15 @@
 > Show Parent Class
 ```
 
+### The following Rules must be followed when implementing Virtual Functions
+1. They are declared in public section of class.
+2. Virtual functions cannot be static and also cannot be a friend function of another class.
+3. Virtual functions should be accessed using pointer or reference of base class type to achieve run time polymorphism.
+4. The prototype of virtual functions should be same in base as well as derived class. (same signatures) 
+5. They are always defined in base class and overridden in derived class. It is not mandatory for derived class to override (or re-define the virtual function), in that case base class version of function is used.
+6. A class may have a virtual destructor but it cannot have a virtual constructor.
+
+Note: There are additional rules for Pure Virtual Functions. 
+
+
 - Source: https://www.geeksforgeeks.org/virtual-function-cpp/
